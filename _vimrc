@@ -50,6 +50,8 @@ colorscheme hybrid
 
 " setting
 syntax on
+" コピペの有効化
+set clipboard+=unnamed
 "文字コードをUFT-8に設定
 set fenc=utf-8
 " バックアップファイルを作らない
