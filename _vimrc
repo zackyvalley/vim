@@ -82,6 +82,8 @@ set laststatus=2
 set ruler
 " タイトルをセット
 set title
+" 米印
+set ambiwidth=double
 
 " Tab系
 " 不可視文字を可視化(タブが「▸-」と表示される)
