@@ -46,7 +46,7 @@ let g:python3_host_prog = expand('/usr/local/bin/python3')
 autocmd ColorScheme * highlight Normal ctermbg=none
 autocmd ColorScheme * highlight LineNr ctermbg=none
 set background=dark
-colorscheme hybrid
+colorscheme molokai
 
 " setting
 syntax on
@@ -78,6 +78,10 @@ set virtualedit=onemore
 set showmatch
 " ステータスラインを常に表示
 set laststatus=2
+" ルーラーを表示
+set ruler
+" タイトルをセット
+set title
 
 " Tab系
 " 不可視文字を可視化(タブが「▸-」と表示される)
@@ -123,6 +127,7 @@ vnoremap k gk
 
 " jjでエスケープ
 inoremap <silent> jj <ESC>:<C-u>w<CR>
+inoremap <silent> っj <ESC>
 
 " 入力モードでのカーソル移動
 inoremap <C-j> <Down>
