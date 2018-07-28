@@ -15,7 +15,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 
   " Add or remove your plugins here:
-  let s:toml = '~/.config/nvim/dein-plugins.toml'
+  let s:toml = 'dein-plugins.toml'
   call dein#load_toml(s:toml, {'lazy': 0})
 
   " You can specify revision/branch/tag.
@@ -147,28 +147,37 @@ autocmd FileType html,css,scss imap <buffer><expr><tab>
 "End Pluginの設定------------------------
 "
 "" NERDTree の設定 -------------------------------------------------------------
-  " ctrl-n で NERDTree を起動
-  nnoremap <silent> <C-n> :NERDTreeToggle<CR>
-  " ブックマークを表示
-  let g:NERDTreeShowBookmarks=1
-  " 親ディレクトリへ移動
-  let g:NERDTreeMapUpdir=''
-  " ファイルの開き方
-  let g:NERDTreeMapOpenSplit='<C-j>'
-  let g:NERDTreeMapOpenVSplit='<C-l>'
+" ctrl-n で NERDTree を起動
+nnoremap <silent> <C-n> :NERDTreeToggle<CR>
+" ブックマークを表示
+let g:NERDTreeShowBookmarks=1
+" 親ディレクトリへ移動
+let g:NERDTreeMapUpdir=''
+" ファイルの開き方
+let g:NERDTreeMapOpenSplit='<C-j>'
+let g:NERDTreeMapOpenVSplit='<C-l>'
 
-  " ファイルを開いたらNERDTreeを閉じる
-  let g:NERDTreeQuitOnOpen=1
+" ファイルを開いたらNERDTreeを閉じる
+let g:NERDTreeQuitOnOpen=1
 
-  " 隠しファイルを表示
-  let g:NERDTreeShowHidden=1
-  
-  " 非表示ファイル
-  let g:NERDTreeIgnore=['\.git$', '\.clean$', '\.swp$', '\.bak$', '\~$']
+" 隠しファイルを表示
+let g:NERDTreeShowHidden=1
 
-  "NERDTreeを同時に閉じる
-  autocmd bufenter * if (winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree()) | q | endif
+" 非表示ファイル
+let g:NERDTreeIgnore=['\.git$', '\.clean$', '\.swp$', '\.bak$', '\~$']
+
+"NERDTreeを同時に閉じる
+autocmd bufenter * if (winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree()) | q | endif
 
 
-
+" airline
+let g:airline_theme = 'minimalist'
+" タブラインにもairlineを適用
+let g:airline#extensions#tabline#enabled = 1
+" （タブが一個の場合）バッファのリストをタブラインに表示する機能をオフ
+let g:airline#extensions#tabline#show_buffers = 0
+" 0でそのタブで開いてるウィンドウ数、1で左のタブから連番
+let g:airline#extensions#tabline#tab_nr_type = 1
+" タブに表示する名前（fnamemodifyの第二引数）
+ let g:airline#extensions#tabline#fnamemod = ':t'
 
