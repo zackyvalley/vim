@@ -16,7 +16,11 @@ if dein#load_state('~/.cache/dein')
 
   " Add or remove your plugins here:
   let s:toml = '~/dotfiles/dein-plugins.toml'
+  let s:lazy_toml = '~/dotfiles/dein-plugins_lazy.toml'
+
   call dein#load_toml(s:toml, {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
+
 
   " You can specify revision/branch/tag.
   call dein#add('Shougo/deol.nvim', { 'rev': '01203d4c9' })
@@ -141,10 +145,13 @@ inoremap <C-l> <Right>
 "End key bind-------------------------
 
 "Start Pluginの設定------------------------
+" Emmet
+" autocmd FileType html,css,scss imap <buffer><expr><tab>
+"     \ emmet#isExpandable() ? "\<plug>(emmet-expand-abbr)" :
+"     \ "\<tab>"
 
-autocmd FileType html,css,scss imap <buffer><expr><tab>
-    \ emmet#isExpandable() ? "\<plug>(emmet-expand-abbr)" :
-    \ "\<tab>"
+"ctrl + e で展開
+ let g:user_emmet_expandabbr_key = '<c-e>'
 
 "End Pluginの設定------------------------
 "
@@ -181,5 +188,23 @@ let g:airline#extensions#tabline#show_buffers = 0
 " 0でそのタブで開いてるウィンドウ数、1で左のタブから連番
 let g:airline#extensions#tabline#tab_nr_type = 1
 " タブに表示する名前（fnamemodifyの第二引数）
- let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+
+" neosnippet
+let g:neosnippet#snippets_directory='~/.vim/my_snippet'
+ 
+" SuperTab like snippets behavior.
+imap  <expr><TAB>
+    \ pumvisible() ? "\<C-n>" :
+    \ neosnippet#expandable_or_jumpable() ?
+    \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+ 
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+    \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+ 
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
+
 
