@@ -15,7 +15,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 
   " Add or remove your plugins here:
-  let s:toml = 'dein-plugins.toml'
+  let s:toml = '~/dotfiles/dein-plugins.toml'
   call dein#load_toml(s:toml, {'lazy': 0})
 
   " You can specify revision/branch/tag.
