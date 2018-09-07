@@ -64,6 +64,8 @@ set fenc=utf-8
 set nobackup
 " スワップファイルを作らない
 set noswapfile
+"undoファイルの保存場所を変更
+set undodir=~/.vim/undo
 " 編集中のファイルが変更されたら自動で読み直す
 set autoread
 " バッファが編集中でもその他のファイルを開けるように
