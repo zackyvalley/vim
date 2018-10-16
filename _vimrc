@@ -134,8 +134,12 @@ vnoremap j gj
 vnoremap k gk
 
 " jjでエスケープ
-inoremap <silent> jj <ESC>:<C-u>w<CR>
+inoremap <silent> jj <ESC>
 inoremap <silent> っj <ESC>
+
+" ctrl + jでエスケープ
+"imap <C-j> <esc>
+"imap <C-ｊ> <esc>
 
 " 入力モードでのカーソル移動
 inoremap <C-j> <Down>
