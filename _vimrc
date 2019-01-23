@@ -15,8 +15,8 @@ if dein#load_state('~/.cache/dein')
   call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 
   " Add or remove your plugins here:
-  let s:toml = '~/dotfiles/dein-plugins.toml'
-  let s:lazy_toml = '~/dotfiles/dein-plugins_lazy.toml'
+  let s:toml = '~/dotfiles/vim/dein-plugins.toml'
+  let s:lazy_toml = '~/dotfiles/vim/dein-plugins_lazy.toml'
 
   call dein#load_toml(s:toml, {'lazy': 0})
   call dein#load_toml(s:lazy_toml, {'lazy': 1})
@@ -43,14 +43,14 @@ syntax enable
 
 "let g:python_host_prog=$PYENV_ROOT.'/versions/neovim-2/bin/python'
 "let g:python3_host_prog=$PYENV_ROOT.'/versions/neovim-3/bin/python'
-let g:python_host_prog = expand('/usr/local/bin/python2')
-let g:python3_host_prog = expand('/usr/local/bin/python3')
+"let g:python_host_prog = expand('/usr/local/bin/python2')
+"let g:python3_host_prog = expand('/usr/local/bin/python3')
 
 "color
 autocmd ColorScheme * highlight Normal ctermbg=none
 autocmd ColorScheme * highlight LineNr ctermbg=none
 set background=dark
-colorscheme molokai
+colorscheme hybrid
 
 " setting
 syntax on
