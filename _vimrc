@@ -50,7 +50,7 @@ let g:python3_host_prog = expand('/usr/local/bin/python3')
 autocmd ColorScheme * highlight Normal ctermbg=none
 autocmd ColorScheme * highlight LineNr ctermbg=none
 set background=dark
-colorscheme molokai
+colorscheme hybrid
 
 " setting
 syntax on
