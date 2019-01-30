@@ -48,9 +48,15 @@ syntax enable
 
 "color
 autocmd ColorScheme * highlight Normal ctermbg=none
-autocmd ColorScheme * highlight LineNr ctermbg=none
+"行数背景
+autocmd ColorScheme * highlight LineNr ctermbg=none 
+"行数文字色
+autocmd ColorScheme * highlight LineNr ctermfg=245
 set background=dark
 colorscheme hybrid
+
+" 背景透過
+set transparency=20
 
 " setting
 syntax on
@@ -75,7 +81,7 @@ set showcmd
 " 行番号を表示
 set number
 " 現在の行を強調表示
-"set cursorline
+set cursorline
 " 現在の行を強調表示（縦）
 "set cursorcolumn
 " 行末の1文字先までカーソルを移動できるように
@@ -162,31 +168,47 @@ inoremap <C-l> <Right>
 "End Pluginの設定------------------------
 "
 "" NERDTree の設定 -------------------------------------------------------------
-" ctrl-n で NERDTree を起動
-nnoremap <silent> <C-n> :NERDTreeToggle<CR>
-" ブックマークを表示
-let g:NERDTreeShowBookmarks=1
-" 親ディレクトリへ移動
-let g:NERDTreeMapUpdir=''
-" ファイルの開き方
-let g:NERDTreeMapOpenSplit='<C-j>'
-let g:NERDTreeMapOpenVSplit='<C-l>'
+"" ctrl-n で NERDTree を起動
+"nnoremap <silent> <C-n> :NERDTreeToggle<CR>
+"" ブックマークを表示
+"let g:NERDTreeShowBookmarks=1
+"" 親ディレクトリへ移動
+"let g:NERDTreeMapUpdir=''
+"" ファイルの開き方
+"let g:NERDTreeMapOpenSplit='<C-j>'
+"let g:NERDTreeMapOpenVSplit='<C-l>'
+"
+"" ファイルを開いたらNERDTreeを閉じる
+""let g:NERDTreeQuitOnOpen=1
+"
+"" 隠しファイルを表示
+"let g:NERDTreeShowHidden=1
+"
+"" 非表示ファイル
+"let g:NERDTreeIgnore=['\.git$', '\.clean$', '\.swp$', '\.bak$', '\~$']
+"
+""NERDTreeを同時に閉じる
+"" autocmd bufenter * if (winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree()) | q | endif
 
-" ファイルを開いたらNERDTreeを閉じる
-"let g:NERDTreeQuitOnOpen=1
 
-" 隠しファイルを表示
-let g:NERDTreeShowHidden=1
+""NERDTREETABSの設定-------------------------------------------------------------
+"
+" 隠しファイルを表示する
+let NERDTreeShowHidden = 1
 
-" 非表示ファイル
-let g:NERDTreeIgnore=['\.git$', '\.clean$', '\.swp$', '\.bak$', '\~$']
+nnoremap <silent><C-n> :NERDTreeFocusToggle<CR>
 
-"NERDTreeを同時に閉じる
-autocmd bufenter * if (winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree()) | q | endif
+" デフォルトでツリーを表示させる
+let g:nerdtree_tabs_open_on_console_startup=1
+
+" 他のバッファをすべて閉じた時にNERDTreeが開いていたらNERDTreeも一緒に閉じる。
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+
 
 
 " airline
-let g:airline_theme = 'minimalist'
+let g:airline_theme = 'papercolor'
 " タブラインにもairlineを適用
 let g:airline#extensions#tabline#enabled = 1
 " （タブが一個の場合）バッファのリストをタブラインに表示する機能をオフ
@@ -239,3 +261,14 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'tagbar', 'unite']
+
+" GUIパーツの非表示化
+if has('gui')
+  set guioptions-=T
+  set guioptions-=m
+  set guioptions-=r
+  set guioptions-=R
+  set guioptions-=l
+  set guioptions-=L
+  set guioptions-=b
+endif
