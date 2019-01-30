@@ -1,0 +1,7 @@
+set guifont=Ricty\ for\ Powerline:h18
+
+"color
+autocmd ColorScheme * highlight Normal ctermbg=none
+autocmd ColorScheme * highlight LineNr ctermbg=none
+set background=dark
+colorscheme hybrid
