@@ -51,7 +51,7 @@ autocmd ColorScheme * highlight Normal ctermbg=none
 "行数背景
 autocmd ColorScheme * highlight LineNr ctermbg=none 
 "行数文字色
-autocmd ColorScheme * highlight LineNr ctermfg=245
+autocmd ColorScheme * highlight LineNr ctermfg=255
 set background=dark
 colorscheme hybrid
 
@@ -81,7 +81,12 @@ set showcmd
 " 行番号を表示
 set number
 " 現在の行を強調表示
-set cursorline
+"set cursorline
+augroup vimrc-auto-cursorline
+  autocmd!
+  autocmd CursorMoved,CursorMovedI,WinLeave * setlocal nocursorline
+  autocmd CursorHold,CursorHoldI * setlocal cursorline
+augroup END
 " 現在の行を強調表示（縦）
 "set cursorcolumn
 " 行末の1文字先までカーソルを移動できるように
@@ -153,6 +158,11 @@ inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 
+" bufferの移動
+nnoremap <silent>bp :bprevious<CR>
+nnoremap <silent>bn :bnext<CR>
+nnoremap <silent>bb :b#<CR>
+
 
 "End key bind-------------------------
 
@@ -167,42 +177,42 @@ inoremap <C-l> <Right>
 
 "End Pluginの設定------------------------
 "
-"" NERDTree の設定 -------------------------------------------------------------
-"" ctrl-n で NERDTree を起動
-"nnoremap <silent> <C-n> :NERDTreeToggle<CR>
-"" ブックマークを表示
-"let g:NERDTreeShowBookmarks=1
-"" 親ディレクトリへ移動
-"let g:NERDTreeMapUpdir=''
-"" ファイルの開き方
-"let g:NERDTreeMapOpenSplit='<C-j>'
-"let g:NERDTreeMapOpenVSplit='<C-l>'
-"
-"" ファイルを開いたらNERDTreeを閉じる
-""let g:NERDTreeQuitOnOpen=1
-"
-"" 隠しファイルを表示
-"let g:NERDTreeShowHidden=1
-"
-"" 非表示ファイル
-"let g:NERDTreeIgnore=['\.git$', '\.clean$', '\.swp$', '\.bak$', '\~$']
-"
-""NERDTreeを同時に閉じる
-"" autocmd bufenter * if (winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree()) | q | endif
+" NERDTree の設定 -------------------------------------------------------------
+" ctrl-n で NERDTree を起動
+nnoremap <silent> <C-n> :NERDTreeToggle<CR>
+" ブックマークを表示
+let g:NERDTreeShowBookmarks=1
+" 親ディレクトリへ移動
+let g:NERDTreeMapUpdir=''
+" ファイルの開き方
+let g:NERDTreeMapOpenSplit='<C-j>'
+let g:NERDTreeMapOpenVSplit='<C-l>'
+
+" ファイルを開いたらNERDTreeを閉じる
+"let g:NERDTreeQuitOnOpen=1
+
+" 隠しファイルを表示
+let g:NERDTreeShowHidden=1
+
+" 非表示ファイル
+let g:NERDTreeIgnore=['\.git$', '\.clean$', '\.swp$', '\.bak$', '\~$']
+
+"NERDTreeを同時に閉じる
+ autocmd bufenter * if (winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree()) | q | endif
 
 
 ""NERDTREETABSの設定-------------------------------------------------------------
 "
 " 隠しファイルを表示する
-let NERDTreeShowHidden = 1
-
-nnoremap <silent><C-n> :NERDTreeFocusToggle<CR>
-
-" デフォルトでツリーを表示させる
-let g:nerdtree_tabs_open_on_console_startup=1
-
-" 他のバッファをすべて閉じた時にNERDTreeが開いていたらNERDTreeも一緒に閉じる。
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"let NERDTreeShowHidden = 1
+"
+"nnoremap <silent><C-n> :NERDTreeFocusToggle<CR>
+"
+"" デフォルトでツリーを表示させる
+"let g:nerdtree_tabs_open_on_console_startup=1
+"
+"" 他のバッファをすべて閉じた時にNERDTreeが開いていたらNERDTreeも一緒に閉じる。
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
 
