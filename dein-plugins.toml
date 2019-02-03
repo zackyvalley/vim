@@ -27,3 +27,6 @@ repo = 'nathanaelkane/vim-indent-guides'
 
 #[[plugins]]
 #repo = 'jistr/vim-nerdtree-tabs'
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
