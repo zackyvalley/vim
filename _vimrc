@@ -66,6 +66,7 @@ set clipboard+=unnamed
 set backspace=indent,eol,start
 "文字コードをUFT-8に設定
 set fenc=utf-8
+set enc=utf-8
 " バックアップファイルを作らない
 set nobackup
 " スワップファイルを作らない
@@ -103,8 +104,8 @@ set title
 set ambiwidth=double
 
 " Tab系
-" 不可視文字を可視化(タブが「▸-」と表示される)
-set list listchars=tab:\▸\-
+" 不可視文字を可視化(タブが「?-」と表示される)
+set list listchars=tab:\?\-
 "自動インデント
 set autoindent
 " Tab文字を半角スペースにする
