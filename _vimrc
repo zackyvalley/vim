@@ -51,7 +51,7 @@ autocmd ColorScheme * highlight Normal ctermbg=none
 "行数背景
 autocmd ColorScheme * highlight LineNr ctermbg=none 
 "行数文字色
-autocmd ColorScheme * highlight LineNr ctermfg=245
+autocmd ColorScheme * highlight LineNr ctermfg=255
 set background=dark
 colorscheme hybrid
 
@@ -66,6 +66,7 @@ set clipboard+=unnamed
 set backspace=indent,eol,start
 "文字コードをUFT-8に設定
 set fenc=utf-8
+set enc=utf-8
 " バックアップファイルを作らない
 set nobackup
 " スワップファイルを作らない
@@ -81,7 +82,12 @@ set showcmd
 " 行番号を表示
 set number
 " 現在の行を強調表示
-set cursorline
+"set cursorline
+augroup vimrc-auto-cursorline
+  autocmd!
+  autocmd CursorMoved,CursorMovedI,WinLeave * setlocal nocursorline
+  autocmd CursorHold,CursorHoldI * setlocal cursorline
+augroup END
 " 現在の行を強調表示（縦）
 "set cursorcolumn
 " 行末の1文字先までカーソルを移動できるように
@@ -98,8 +104,8 @@ set title
 set ambiwidth=double
 
 " Tab系
-" 不可視文字を可視化(タブが「▸-」と表示される)
-set list listchars=tab:\▸\-
+" 不可視文字を可視化(タブが「?-」と表示される)
+set list listchars=tab:\?\-
 "自動インデント
 set autoindent
 " Tab文字を半角スペースにする
@@ -153,6 +159,11 @@ inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 
+" bufferの移動
+nnoremap <silent>bp :bprevious<CR>
+nnoremap <silent>bn :bnext<CR>
+nnoremap <silent>bb :b#<CR>
+
 
 "End key bind-------------------------
 
@@ -167,42 +178,42 @@ inoremap <C-l> <Right>
 
 "End Pluginの設定------------------------
 "
-"" NERDTree の設定 -------------------------------------------------------------
-"" ctrl-n で NERDTree を起動
-"nnoremap <silent> <C-n> :NERDTreeToggle<CR>
-"" ブックマークを表示
-"let g:NERDTreeShowBookmarks=1
-"" 親ディレクトリへ移動
-"let g:NERDTreeMapUpdir=''
-"" ファイルの開き方
-"let g:NERDTreeMapOpenSplit='<C-j>'
-"let g:NERDTreeMapOpenVSplit='<C-l>'
-"
-"" ファイルを開いたらNERDTreeを閉じる
-""let g:NERDTreeQuitOnOpen=1
-"
-"" 隠しファイルを表示
-"let g:NERDTreeShowHidden=1
-"
-"" 非表示ファイル
-"let g:NERDTreeIgnore=['\.git$', '\.clean$', '\.swp$', '\.bak$', '\~$']
-"
-""NERDTreeを同時に閉じる
-"" autocmd bufenter * if (winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree()) | q | endif
+" NERDTree の設定 -------------------------------------------------------------
+" ctrl-n で NERDTree を起動
+nnoremap <silent> <C-n> :NERDTreeToggle<CR>
+" ブックマークを表示
+let g:NERDTreeShowBookmarks=1
+" 親ディレクトリへ移動
+let g:NERDTreeMapUpdir=''
+" ファイルの開き方
+let g:NERDTreeMapOpenSplit='<C-j>'
+let g:NERDTreeMapOpenVSplit='<C-l>'
+
+" ファイルを開いたらNERDTreeを閉じる
+"let g:NERDTreeQuitOnOpen=1
+
+" 隠しファイルを表示
+let g:NERDTreeShowHidden=1
+
+" 非表示ファイル
+let g:NERDTreeIgnore=['\.git$', '\.clean$', '\.swp$', '\.bak$', '\~$']
+
+"NERDTreeを同時に閉じる
+ autocmd bufenter * if (winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree()) | q | endif
 
 
 ""NERDTREETABSの設定-------------------------------------------------------------
 "
 " 隠しファイルを表示する
-let NERDTreeShowHidden = 1
-
-nnoremap <silent><C-n> :NERDTreeFocusToggle<CR>
-
-" デフォルトでツリーを表示させる
-let g:nerdtree_tabs_open_on_console_startup=1
-
-" 他のバッファをすべて閉じた時にNERDTreeが開いていたらNERDTreeも一緒に閉じる。
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"let NERDTreeShowHidden = 1
+"
+"nnoremap <silent><C-n> :NERDTreeFocusToggle<CR>
+"
+"" デフォルトでツリーを表示させる
+"let g:nerdtree_tabs_open_on_console_startup=1
+"
+"" 他のバッファをすべて閉じた時にNERDTreeが開いていたらNERDTreeも一緒に閉じる。
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
 
@@ -272,3 +283,32 @@ if has('gui')
   set guioptions-=L
   set guioptions-=b
 endif
+
+
+""" Unite.vim
+" 起動時にインサートモードで開始
+let g:unite_enable_start_insert = 1
+" インサート／ノーマルどちらからでも呼び出せるようにキーマップ
+nnoremap <silent> <C-f> :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+inoremap <silent> <C-f> <ESC>:<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> <C-b> :<C-u>Unite buffer file_mru<CR>
+inoremap <silent> <C-b> <ESC>:<C-u>Unite buffer file_mru<CR>
+" バッファ一覧
+nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
+" ファイル一覧
+nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+" レジスタ一覧
+nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
+" 最近使用したファイル一覧
+nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
+" 全部乗せ
+nnoremap <silent> ,ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
+" unite.vim上でのキーマッピング
+autocmd FileType unite call s:unite_my_settings()
+function! s:unite_my_settings()
+  " 単語単位からパス単位で削除するように変更
+  imap <buffer> <C-w> <Plug>(unite_delete_backward_path)
+  " ESCキーを2回押すと終了する
+  nmap <silent><buffer> <ESC><ESC> q
+  imap <silent><buffer> <ESC><ESC> <ESC>q
+endfunction

@@ -3,8 +3,10 @@ set guifont=Ricty\ for\ Powerline:h18
 "color
 autocmd ColorScheme * highlight Normal ctermbg=none
 autocmd ColorScheme * highlight LineNr ctermbg=none
+autocmd ColorScheme * highlight LineNr ctermfg=255
+autocmd ColorScheme * highlight LineNr guifg=#999999
+
 set background=dark
 colorscheme hybrid
 
-set columns=9999
-set lines=9999
+set lines=99999 columns=99999
